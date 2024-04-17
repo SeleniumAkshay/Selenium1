@@ -72,7 +72,7 @@ public class BaseTest {
 		}
 		listenersDriver = driver;
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
 		driver.get(url);
 		homePage = new HomePage(driver);
 	}

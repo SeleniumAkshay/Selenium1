@@ -6,7 +6,7 @@ import com.shoppersStack.genericUtility.BaseTest;
 import com.shoppersStack.pom.MyAddressPage;
 import com.shoppersStack.pom.MyProfilePage;
 
-public class Verify_user_is_able_to_delete_address_Test extends BaseTest{
+public class Verify_user_is_able_to_delete_address extends BaseTest{
 	
 	@Test
 	public void deleteAddress() throws InterruptedException {

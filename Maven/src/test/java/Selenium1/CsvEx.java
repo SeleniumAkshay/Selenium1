@@ -11,7 +11,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 
-public class CsvTestEx {
+public class CsvEx {
 	
 	@Test
 	public void demo() throws IOException, CsvException {
