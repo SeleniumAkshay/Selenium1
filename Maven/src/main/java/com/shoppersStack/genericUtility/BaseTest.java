@@ -24,15 +24,15 @@ import com.shoppersStack.pom.LoginPage;
 import com.shoppersStack.pom.WelcomePage;
 
 public class BaseTest {
-	
+
 	public WebDriver driver;
 	public static WebDriver listenersDriver;
-	public FileUtility file=new FileUtility();
-	public WebdriverUtility webdriverUtil=new WebdriverUtility();
+	public FileUtility file = new FileUtility();
+	public WebdriverUtility webdriverUtil = new WebdriverUtility();
 	public ExtentSparkReporter spark;
 	public ExtentReports report;
 	public ExtentTest test;
-	public JavaUtility java=new JavaUtility();
+	public JavaUtility java = new JavaUtility();
 	public HomePage homePage;
 
 	@BeforeSuite
@@ -40,7 +40,7 @@ public class BaseTest {
 		System.out.println("BeforeSuite");
 //		spark=new ExtentSparkReporter("./Reports/"+java.localDateTime()+".html");
 	}
-	
+
 	@BeforeTest
 	public void bt() {
 		System.out.println("BeforeTest");
@@ -48,75 +48,76 @@ public class BaseTest {
 //		report.attachReporter(spark);
 //		test = report.createTest("Demo");
 	}
-	
+
 	@BeforeClass
 	public void bc() throws IOException {
-		String url = file.readPropertyData("url");
-		
-		String browser = file.readPropertyData("browser");
-		
+//		String url = file.readPropertyData("url");
+//		
+//		String browser = file.readPropertyData("browser");
+
+		String url = System.getProperty("url");
+
+		String browser = System.getProperty("browser");
+
 		System.out.println("BeforeClass");
-		
+
 		if (browser.equals("chrome")) {
-			driver=new ChromeDriver();
-		}
-		else if (browser.equals("firefox")) {
-			driver=new FirefoxDriver();
-		}
-		else if (browser.equals("edge")) {
-			driver=new EdgeDriver();
-		}
-		else {
+			driver = new ChromeDriver();
+		} else if (browser.equals("firefox")) {
+			driver = new FirefoxDriver();
+		} else if (browser.equals("edge")) {
+			driver = new EdgeDriver();
+		} else {
 			System.out.println(" Enter Valid Browser Name ");
 		}
-		listenersDriver=driver;
+		listenersDriver = driver;
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
 		driver.get(url);
-		homePage=new HomePage(driver);
+		homePage = new HomePage(driver);
 	}
-	
+
 	@BeforeMethod
 	public void bm() throws IOException {
 		System.out.println("BeforeMethod");
 //		test.log(Status.INFO, "Navigated");
-		WelcomePage welcomePage=new WelcomePage(driver);
+		WelcomePage welcomePage = new WelcomePage(driver);
 		welcomePage.getLoginButton().click();
 //		test.log(Status.INFO, "In login page");
-		
-		LoginPage loginPage=new LoginPage(driver);
+
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.getEmailTf().sendKeys(file.readPropertyData("username"));
 		loginPage.getPwtTf().sendKeys(file.readPropertyData("password"));
 		loginPage.getLoginButton().click();
 //		test.log(Status.INFO, "In home page");
 	}
-	
+
 	@AfterMethod
 	public void am() {
 		System.out.println("AfterMethod");
-		
+
 		homePage.getAccountBtn().click();
 		homePage.getLogOutBtn().click();
 //		test.log(Status.INFO, "Logout");
-		
+
 	}
-	
+
 	@AfterClass
 	public void ac() throws InterruptedException {
 		System.out.println("AfterClass");
 		Thread.sleep(3000);
 		driver.quit();
 	}
-	
+
 	@AfterTest
 	public void at() {
 		System.out.println("AfterTest");
 //		report.flush();
 	}
-	
+
 	@AfterSuite
 	public void as() {
 		System.out.println("AfterSuite");
 	}
-	
- }
+
+}
